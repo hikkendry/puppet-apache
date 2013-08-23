@@ -8,6 +8,8 @@ NameVirtualHost *:<%= @port %>
 </Directory>
 
 <VirtualHost *:<%= @port %>>
+	ServerName dev
+	ServerAlias *.dev
     UseCanonicalName off
-    VirtualDocumentRoot <%= @vhost_docroot %>/%0/www
+    VirtualDocumentRoot <%= @vhost_docroot %>/%1/www
 </VirtualHost>

@@ -35,6 +35,12 @@ class apache {
     require => File[$apache::config::configfile]
   }
 
+  apache::vhost { 'localhost':
+    docroot  => "${boxen::config::srcdir}",
+    host     => "localhost",
+    port     => $apache::config::port,
+  }
+  
   apache::vhost { 'dnsmasq':
     docroot  => "${boxen::config::srcdir}",
     port     => $apache::config::port,

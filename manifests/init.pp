@@ -2,12 +2,7 @@ class apache {
 
   include apache::config
 
-  # Yeah really
-  include nginx::config
-  include nginx
-
   # Bring default plist under our control - taken from Mountain Lion 10.8.2
-
   file { '/System/Library/LaunchDaemons/org.apache.httpd.plist':
     content => template('apache/org.apache.httpd.plist.erb'),
     group   => 'wheel',
@@ -40,18 +35,10 @@ class apache {
     require => File[$apache::config::configfile]
   }
 
-  # Set up our basic site - apache.dev
-  # This can be used to view server info etc
-
-  file { "${nginx::config::sitesdir}/apache.conf":
-    content => template('apache/nginx.conf.erb'),
-    require => File[$nginx::config::sitesdir],
-    notify  => Service['dev.nginx'],
-  }
-
   apache::vhost { 'apache':
-    docroot  => "${boxen::config::datadir}/apache",
+    docroot  => "${boxen::config::srcdir}",
     port     => $apache::config::port,
+    template => "vhost_dnsmasq.conf",
   }
 
 }

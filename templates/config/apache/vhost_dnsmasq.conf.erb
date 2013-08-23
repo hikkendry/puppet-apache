@@ -1,0 +1,13 @@
+NameVirtualHost *:<%= @port %>
+
+<Directory <%= @vhost_docroot %>>
+    Options Indexes MultiViews FollowSymLinks Includes
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+</Directory>
+
+<VirtualHost *:<%= @port %>>
+    UseCanonicalName off
+    VirtualDocumentRoot <%= @vhost_docroot %>/%0/www
+</VirtualHost>

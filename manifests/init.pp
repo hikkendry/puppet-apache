@@ -40,10 +40,4 @@ class apache {
     host     => "localhost",
     port     => $apache::config::port,
   }
-  
-  apache::vhost { 'dnsmasq':
-    docroot  => "${boxen::config::srcdir}",
-    port     => $apache::config::port,
-    template => "vhost_dnsmasq.conf",
-  }
 }

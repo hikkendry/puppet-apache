@@ -14,6 +14,7 @@ define apache::vhost(
   $port,
   $docroot  = undef,
   $host = undef,
+  $template = 'vhost.conf',
 ) {
   include apache
 
@@ -28,7 +29,7 @@ define apache::vhost(
   }
 
   file { "${apache::config::sitesdir}/${name}.conf":
-    content => template("apache/config/apache/vhost.conf.erb"),
+    content => template("apache/config/apache/${template}.erb"),
     require => File[$apache::config::sitesdir],
     notify  => Service['org.apache.httpd'],
   }

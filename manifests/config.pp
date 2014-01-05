@@ -1,4 +1,5 @@
 class apache::config {
+
   include boxen::config
 
   $configdir  = "/etc/apache2"
@@ -10,5 +11,6 @@ class apache::config {
   $logdir     = "${boxen::config::logdir}/apache"
   $logerror   = "${logdir}/error.log"
 
-  $port = '80'  
+  $port = '80'
+  
 }

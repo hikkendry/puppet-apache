@@ -1,9 +1,10 @@
 # Use name-based virtual hosting.
+#
 NameVirtualHost *:<%= @port %>
 
 <Directory <%= @vhost_docroot %>>
-    AllowOverride All
-    Order allow,deny
+    AllowOverride ALL
+    Order Allow,Deny
     Allow from all
 </Directory>
 

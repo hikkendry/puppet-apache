@@ -166,7 +166,7 @@ ServerAdmin you@example.com
 # documents. By default, all requests are taken from this directory, but
 # symbolic links and aliases may be used to point to other locations.
 #
-DocumentRoot "<%= scope.lookupvar "boxen::config::srcdir" %>"
+DocumentRoot "<%= scope.lookupvar "apache::config::sites_docroot" %>"
 
 #
 # Each directory to which Apache has access can be configured with respect
@@ -193,7 +193,7 @@ DocumentRoot "<%= scope.lookupvar "boxen::config::srcdir" %>"
 #
 # This should be changed to whatever you set DocumentRoot to.
 #
-<Directory "<%= scope.lookupvar "boxen::config::srcdir" %>">
+<Directory "<%= scope.lookupvar "apache::config::sites_docroot" %>">
     #
     # Possible values for the Options directive are "None", "All",
     # or any combination of:

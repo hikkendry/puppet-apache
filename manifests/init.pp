@@ -23,6 +23,12 @@ class apache {
     group  => wheel,
   }
 
+  file { [
+    $apache::config::sites_docroot,
+  ]:
+    ensure => directory
+  }
+
   file { $apache::config::configfile:
     content => template('apache/config/apache/httpd.conf.erb'),
     notify  => Service['org.apache.httpd'],
@@ -35,14 +41,14 @@ class apache {
     require => File[$apache::config::configfile]
   }
 
-  apache::vhost { 'localhost':
-    docroot  => "${boxen::config::srcdir}",
-    host     => "localhost",
-    port     => $apache::config::port,
-  }
+  # apache::vhost { 'localhost':
+  #   docroot  => "${boxen::config::srcdir}",
+  #   host     => "localhost",
+  #   port     => $apache::config::port,
+  # }
   
   apache::vhost { 'dnsmasq':
-    docroot  => "${boxen::config::srcdir}",
+    docroot  => "${apache::config::sites_docroot}",
     port     => $apache::config::port,
     template => "vhost_dnsmasq.conf",
   }
